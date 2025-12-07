@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="15.0" styleClass="root" stylesheets="@../css/style.css"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.hotel.controller.RegisterController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Créer un compte" styleClass="title">
+        <font>
+            <Font size="20"/>
+        </font>
+    </Label>
+
+    <VBox spacing="10" prefWidth="360">
+        <Label text="Nom complet"/>
+        <TextField fx:id="fullNameField" promptText="Nom complet" styleClass="text-field prompt-dark"/>
+
+        <Label text="Email / Login"/>
+        <TextField fx:id="emailField" promptText="exemple@domaine.com" styleClass="text-field prompt-dark"/>
+
+        <Label text="Mot de passe"/>
+        <PasswordField fx:id="passwordField" promptText="Mot de passe" styleClass="password-field prompt-dark"/>
+
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Button fx:id="cancelButton" onAction="#handleCancel" styleClass="btn-secondary" text="Annuler"/>
+            <Button fx:id="submitButton" onAction="#handleSubmit" styleClass="btn-primary" text="Créer"/>
+        </HBox>
+    </VBox>
+</VBox>

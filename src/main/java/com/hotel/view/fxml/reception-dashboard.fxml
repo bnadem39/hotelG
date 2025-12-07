@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane styleClass="cyber-root" stylesheets="@../css/style.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hotel.controller.ReceptionController">
+
+    <!-- En-tête -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="glass-panel header">
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+            <Label fx:id="welcomeLabel" styleClass="cyber-title" text="Bienvenue, Réception">
+                <font>
+                    <Font name="Orbitron" size="20.0"/>
+                </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS"/>
+            <ToggleButton fx:id="fullscreenToggle" styleClass="neon-button" onAction="#handleToggleFullScreen" text="Plein écran" />
+            <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="neon-button" text="Déconnexion"/>
+        </HBox>
+    </top>
+
+    <!-- Contenu principal avec ScrollPane pour le défilement vertical -->
+    <center>
+        <ScrollPane fitToWidth="true" pannable="true" styleClass="scanlines">
+            <content>
+                <VBox spacing="20.0" styleClass="glass-panel">
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+
+                    <!-- Statistiques -->
+                    <HBox alignment="CENTER" spacing="30.0">
+                        <VBox alignment="CENTER" spacing="5.0" styleClass="stat-card glass-panel">
+                            <padding>
+                                <Insets bottom="15.0" left="30.0" right="30.0" top="15.0"/>
+                            </padding>
+                            <Label styleClass="stat-label neon-accent" text="Chambres Libres"/>
+                            <Label fx:id="statsLibreLabel" styleClass="stat-value neon-accent" text="0">
+                                <font>
+                                    <Font name="Orbitron" size="32.0"/>
+                                </font>
+                            </Label>
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="5.0" styleClass="stat-card glass-panel">
+                            <padding>
+                                <Insets bottom="15.0" left="30.0" right="30.0" top="15.0"/>
+                            </padding>
+                            <Label styleClass="stat-label neon-accent" text="Chambres Occupées"/>
+                            <Label fx:id="statsOccupeeLabel" styleClass="stat-value neon-accent" text="0">
+                                <font>
+                                    <Font name="Orbitron" size="32.0"/>
+                                </font>
+                            </Label>
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="5.0" styleClass="stat-card glass-panel">
+                            <padding>
+                                <Insets bottom="15.0" left="30.0" right="30.0" top="15.0"/>
+                            </padding>
+                            <Label styleClass="stat-label neon-accent" text="En Ménage"/>
+                            <Label fx:id="statsMenageLabel" styleClass="stat-value neon-accent" text="0">
+                                <font>
+                                    <Font name="Orbitron" size="32.0"/>
+                                </font>
+                            </Label>
+                        </VBox>
+                    </HBox>
+
+                    <!-- TabPane -->
+                    <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" styleClass="glass-panel">
+                        <!-- Onglet Chambres -->
+                        <Tab text="État des Chambres">
+                            <VBox spacing="15.0">
+                                <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                                </padding>
+
+                                <TableView fx:id="roomsTable" VBox.vgrow="ALWAYS" styleClass="table-view">
+                                    <columns>
+                                        <TableColumn fx:id="roomNumberColumn" prefWidth="120.0" text="Numéro"/>
+                                        <TableColumn fx:id="roomTypeColumn" prefWidth="180.0" text="Type"/>
+                                        <TableColumn fx:id="roomPriceColumn" prefWidth="150.0" text="Prix (€)"/>
+                                        <TableColumn fx:id="roomStatusColumn" prefWidth="180.0" text="Statut"/>
+                                    </columns>
+                                </TableView>
+
+                                <HBox alignment="CENTER" spacing="15.0">
+                                    <Button mnemonicParsing="false" onAction="#handleMarkRoomCleaned"
+                                            styleClass="neon-button" text="Marquer Nettoyée"/>
+                                    <Button mnemonicParsing="false" onAction="#handleRefresh"
+                                            styleClass="neon-button magenta" text="Actualiser"/>
+                                </HBox>
+                            </VBox>
+                        </Tab>
+
+                        <!-- Onglet Réservations -->
+                        <Tab text="Réservations Actives">
+                            <VBox spacing="15.0">
+                                <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                                </padding>
+
+                                <TableView fx:id="reservationsTable" VBox.vgrow="ALWAYS" styleClass="table-view">
+                                    <columns>
+                                        <TableColumn fx:id="resIdColumn" prefWidth="60.0" text="ID"/>
+                                        <TableColumn fx:id="resClientColumn" prefWidth="180.0" text="Client"/>
+                                        <TableColumn fx:id="resRoomColumn" prefWidth="100.0" text="Chambre"/>
+                                        <TableColumn fx:id="resCheckInColumn" prefWidth="120.0" text="Arrivée"/>
+                                        <TableColumn fx:id="resCheckOutColumn" prefWidth="120.0" text="Départ"/>
+                                        <TableColumn fx:id="resStatusColumn" prefWidth="130.0" text="Statut"/>
+                                    </columns>
+                                </TableView>
+
+                                <HBox alignment="CENTER" spacing="15.0">
+                                    <Button mnemonicParsing="false" onAction="#handleCheckIn"
+                                            styleClass="neon-button" text="Check-In"/>
+                                    <Button mnemonicParsing="false" onAction="#handleCheckOut"
+                                            styleClass="neon-button magenta" text="Check-Out"/>
+                                </HBox>
+                            </VBox>
+                        </Tab>
+                    </TabPane>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

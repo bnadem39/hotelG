@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hotel.controller.ClientController" styleClass="glass-panel">
+
+    <children>
+        <VBox spacing="20">
+            <!-- En-tête -->
+            <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="glass-panel header">
+                <padding>
+                    <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+                </padding>
+                <Label fx:id="welcomeLabel" styleClass="cyber-title" text="Bienvenue, Client">
+                    <font>
+                        <Font name="Orbitron" size="20.0"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <ToggleButton fx:id="fullscreenToggle" styleClass="neon-button" onAction="#handleToggleFullScreen" text="Plein écran"/>
+                <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="neon-button" text="Déconnexion"/>
+            </HBox>
+
+            <!-- Contenu principal avec ScrollPane -->
+            <ScrollPane fitToWidth="true" pannable="true" styleClass="scanlines">
+                <content>
+                    <VBox spacing="20.0" styleClass="glass-panel">
+                        <padding>
+                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                        </padding>
+
+                        <!-- TabPane -->
+                        <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" styleClass="glass-panel">
+                            <!-- Onglet Mes Réservations -->
+                            <Tab text="Mes Réservations">
+                                <VBox spacing="15.0">
+                                    <padding>
+                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                                    </padding>
+
+                                    <Label text="Toutes mes réservations" styleClass="cyber-subtitle">
+                                        <font>
+                                            <Font name="Orbitron" size="16.0"/>
+                                        </font>
+                                    </Label>
+
+                                    <TableView fx:id="reservationsTable" VBox.vgrow="ALWAYS" styleClass="table-view">
+                                        <columns>
+                                            <TableColumn fx:id="resIdColumn" prefWidth="60.0" text="ID"/>
+                                            <TableColumn fx:id="resRoomColumn" prefWidth="100.0" text="Chambre"/>
+                                            <TableColumn fx:id="resRoomTypeColumn" prefWidth="120.0" text="Type"/>
+                                            <TableColumn fx:id="resCheckInColumn" prefWidth="130.0" text="Date d'arrivée"/>
+                                            <TableColumn fx:id="resCheckOutColumn" prefWidth="130.0" text="Date de départ"/>
+                                            <TableColumn fx:id="resStatusColumn" prefWidth="130.0" text="Statut"/>
+                                        </columns>
+                                    </TableView>
+                                </VBox>
+                            </Tab>
+
+                            <!-- Onglet Mes Avis et Réclamations -->
+                            <Tab text="Mes Avis et Réclamations">
+                                <VBox spacing="15.0">
+                                    <padding>
+                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                                    </padding>
+
+                                    <Label text="Historique de mes avis et réclamations" styleClass="cyber-subtitle">
+                                        <font>
+                                            <Font name="Orbitron" size="16.0"/>
+                                        </font>
+                                    </Label>
+
+                                    <TableView fx:id="reviewsTable" prefHeight="200.0" styleClass="table-view">
+                                        <columns>
+                                            <TableColumn fx:id="reviewIdColumn" prefWidth="50.0" text="ID"/>
+                                            <TableColumn fx:id="reviewTypeColumn" prefWidth="120.0" text="Type"/>
+                                            <TableColumn fx:id="reviewContentColumn" prefWidth="280.0" text="Contenu"/>
+                                            <TableColumn fx:id="reviewDateColumn" prefWidth="150.0" text="Date"/>
+                                            <TableColumn fx:id="reviewResponseColumn" prefWidth="200.0" text="Réponse"/>
+                                        </columns>
+                                    </TableView>
+
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                        <Button mnemonicParsing="false" onAction="#handleViewResponse"
+                                                styleClass="neon-button" text="Voir la réponse"/>
+                                    </HBox>
+
+                                    <Separator/>
+
+                                    <Label text="Soumettre un nouvel avis ou une réclamation" styleClass="cyber-subtitle">
+                                        <font>
+                                            <Font name="Orbitron" size="16.0"/>
+                                        </font>
+                                    </Label>
+
+                                    <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                        <Label text="Type :" styleClass="neon-accent">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Label>
+                                        <ComboBox fx:id="typeComboBox" prefWidth="200.0" styleClass="glass-input"/>
+                                    </HBox>
+
+                                    <VBox spacing="10.0">
+                                        <Label text="Contenu :" styleClass="neon-accent">
+                                            <font>
+                                                <Font size="14.0"/>
+                                            </font>
+                                        </Label>
+                                        <TextArea fx:id="contentTextArea" prefHeight="120.0"
+                                                  promptText="Écrivez votre message ici..." wrapText="true" styleClass="glass-input"/>
+                                    </VBox>
+
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                        <Button mnemonicParsing="false" onAction="#handleSubmitReview"
+                                                styleClass="neon-button" text="Soumettre"/>
+                                    </HBox>
+                                </VBox>
+                            </Tab>
+                        </TabPane>
+                    </VBox>
+                </content>
+            </ScrollPane>
+        </VBox>
+    </children>
+</AnchorPane>
